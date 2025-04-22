@@ -7,16 +7,24 @@ let currentStation = null;
 
 function playRandomTrack(stationKey) {
   const tracks = audioFiles[stationKey];
-  if (!tracks || tracks.length === 0) return;
+  if (!tracks || tracks.length === 0) {
+    console.warn(`No audio tracks found for station: ${stationKey}`);
+    return;
+  }
 
   // Choose a random track
   const randomIndex = Math.floor(Math.random() * tracks.length);
   const trackPath = tracks[randomIndex];
 
+  // Set source and then play, adding an event listener to catch any errors
   audio.src = trackPath;
-  audio.play();
+  audio.load();
+  audio.play().then(() => {
+    console.log(`Playing: ${trackPath}`);
+  }).catch(error => {
+    console.error('Error playing audio:', error);
+  });
   currentStation = stationKey;
-  console.log(`Playing: ${trackPath}`);
 }
 
 function stopAudio() {
@@ -29,7 +37,7 @@ function stopAudio() {
 document.querySelectorAll('.radio-station').forEach(button => {
   button.addEventListener('click', () => {
     const stationKey = button.dataset.station;
-    if(stationKey !== currentStation) {
+    if (stationKey !== currentStation) {
       playRandomTrack(stationKey);
       updateActive(button);
     }
