@@ -1,0 +1,131 @@
+
+/* GTA V inspired dark theme with glow effects */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background-color: #1a1f2c; /* dark purple base */
+  color: #eee;
+  font-family: 'Montserrat', sans-serif;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.radio-selector-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  touch-action: manipulation;
+  position: relative;
+  padding: 1rem;
+}
+
+.radio-circle {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at center, #221f26 90%, transparent 95%);
+  box-shadow:
+    0 0 20px 4px #7e69abaa,
+    inset 0 0 40px 12px #9b87f5cc;
+}
+
+/* The 8 station buttons are positioned in a circle */
+.radio-station {
+  position: absolute;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  outline-offset: 4px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  filter: drop-shadow(0 0 6px #8b5cf6cc);
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+}
+
+/* Glow on hover */
+.radio-station:hover,
+.radio-station:focus {
+  filter:
+    drop-shadow(0 0 12px #f9731688)
+    drop-shadow(0 0 8px #f97316cc)
+    drop-shadow(0 0 18px #f97316ee);
+  transform: scale(1.1);
+  z-index: 2;
+}
+
+.radio-station img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* Positions for each station (8 around the circle) */
+.radio-station:nth-child(1)  { top: 0%;    left: 50%;  transform: translate(-50%, -50%);}
+.radio-station:nth-child(2)  { top: 19%;   left: 82%;  transform: translate(-50%, -50%);}
+.radio-station:nth-child(3)  { top: 50%;   left: 100%; transform: translate(-50%, -50%);}
+.radio-station:nth-child(4)  { top: 81%;   left: 82%;  transform: translate(-50%, -50%);}
+.radio-station:nth-child(5)  { top: 100%;  left: 50%;  transform: translate(-50%, -50%);}
+.radio-station:nth-child(6)  { top: 81%;   left: 18%;  transform: translate(-50%, -50%);}
+.radio-station:nth-child(7)  { top: 50%;   left: 0%;   transform: translate(-50%, -50%);}
+.radio-station:nth-child(8)  { top: 19%;   left: 18%;  transform: translate(-50%, -50%);}
+
+/* The OFF button is at center-bottom slightly below the circle */
+.radio-off {
+  position: absolute;
+  bottom: -48px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  filter: drop-shadow(0 0 8px #f9731688);
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.radio-off:hover,
+.radio-off:focus {
+  filter:
+    drop-shadow(0 0 16px #f97316cc)
+    drop-shadow(0 0 24px #f97316ee);
+  transform: translateX(-50%) scale(1.2);
+  z-index: 3;
+}
+
+.radio-off img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .radio-circle {
+    width: 260px;
+    height: 260px;
+  }
+  .radio-station {
+    width: 52px;
+    height: 52px;
+  }
+  .radio-off {
+    width: 60px;
+    height: 60px;
+    bottom: -40px;
+  }
+}
