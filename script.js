@@ -17,8 +17,10 @@ function playRandomTrack(stationKey) {
   const trackPath = tracks[randomIndex];
 
   // Set source and then play, adding an event listener to catch any errors
+  audio.pause(); // Stop any current audio
   audio.src = trackPath;
   audio.load();
+
   audio.play().then(() => {
     console.log(`Playing: ${trackPath}`);
   }).catch(error => {
@@ -30,6 +32,7 @@ function playRandomTrack(stationKey) {
 function stopAudio() {
   audio.pause();
   audio.currentTime = 0;
+  audio.src = '';
   currentStation = null;
   console.log('Audio stopped');
 }
@@ -59,6 +62,12 @@ function updateActive(activeButton) {
       btn.style.filter = "drop-shadow(0 0 6px #8b5cf6cc)";
     }
   });
-  document.querySelector('.radio-off').classList.remove('active');
+  const offButton = document.querySelector('.radio-off');
+  if (!activeButton) {
+    offButton.classList.add('active');
+    offButton.style.filter = "drop-shadow(0 0 20px #f97316)";
+  } else {
+    offButton.classList.remove('active');
+    offButton.style.filter = "drop-shadow(0 0 8px #f9731688)";
+  }
 }
-
